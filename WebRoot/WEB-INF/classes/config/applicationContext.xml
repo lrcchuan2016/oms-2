@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:http-conf="http://cxf.apache.org/transports/http/configuration"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	 http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+	 http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+	 http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+	 http://cxf.apache.org/transports/http/configuration http://cxf.apache.org/schemas/configuration/http-conf.xsd
+	 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+	 http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd
+	 " default-lazy-init="true">
+
+	<context:component-scan base-package="cn.broadin.oms" />
+	<aop:aspectj-autoproxy />
+
+	<!-- 加载属性文件，可以通过spEL进行注入到bean中 (当前系统需要写入的配置属性下面这个文件当中写入，采用key=value形式)-->
+	 <util:properties id="aliyunConfig" location="classpath:config/aliyun.properties"/>
+	 <util:properties id="xingeConfig" location="classpath:config/xinge.properties"/>
+
+	<!-- 加载配置文件properties -->
+	<bean id="props" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:config/dataSource.properties</value>
+			</list>
+		</property>
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+	</bean>
+	
+	<!-- (1)、默认数据源 -->
+	<bean id="defaultDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="driverClass" value="${dataSource.default.driverClassName}"></property>
+		<property name="jdbcUrl" value="${dataSource.default.url}"></property>
+		<property name="user" value="${dataSource.default.username}"></property>
+		<property name="password" value="${dataSource.default.password}"></property>
+		<property name="minPoolSize" value="${dataSource.default.minPoolSize}"></property>
+		<property name="maxPoolSize" value="${dataSource.default.maxPoolSize}"></property>
+		<property name="initialPoolSize" value="${dataSource.default.initialPoolSize}"></property>
+		<property name="acquireIncrement" value="${dataSource.default.acquireIncrement}"></property>
+		
+		<property name="checkoutTimeout" value="${dataSource.default.checkoutTimeout}"></property>
+		<property name="idleConnectionTestPeriod" value="${dataSource.default.idleConnectionTestPeriod}"></property>
+		<property name="testConnectionOnCheckout" value="${dataSource.default.testConnectionOnCheckout}"></property>
+		<!--<property name="maxIdleTime" value="${dataSource.default.maxIdleTime}"></property> -->
+		<property name="maxStatements" value="${dataSource.default.maxStatements}"></property>
+		
+	</bean>
+	
+	<!-- (2)、数据统计数据源 -->
+	<bean id="collectionDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="driverClass" value="${dataSource.collect.driverClassName}"></property>
+		<property name="jdbcUrl" value="${dataSource.collect.url}"></property>
+		<property name="user" value="${dataSource.collect.username}"></property>
+		<property name="password" value="${dataSource.collect.password}"></property>
+		<property name="minPoolSize" value="${dataSource.collect.minPoolSize}"></property>
+		<property name="maxPoolSize" value="${dataSource.collect.maxPoolSize}"></property>
+		<property name="initialPoolSize" value="${dataSource.collect.initialPoolSize}"></property>
+		<property name="acquireIncrement" value="${dataSource.collect.acquireIncrement}"></property>
+		
+		<property name="checkoutTimeout" value="${dataSource.collect.checkoutTimeout}"></property>
+		<property name="idleConnectionTestPeriod" value="${dataSource.collect.idleConnectionTestPeriod}"></property>
+		<property name="testConnectionOnCheckout" value="${dataSource.collect.testConnectionOnCheckout}"></property>
+		 <!--<property name="maxIdleTime" value="${dataSource.collect.maxIdleTime}"></property> -->
+		<property name="maxStatements" value="${dataSource.collect.maxStatements}"></property>
+	</bean>
+	
+	<!-- 动态数据源dataSource，实现数据源的切换 -->
+	<bean id="dataSource" class="cn.broadin.oms.dataSource.DynamicDataSource">
+		<property name="targetDataSources">
+			<map key-type="cn.broadin.oms.dataSource.DBType">
+				<entry key="defaultDataSource" value-ref="defaultDataSource"></entry>
+				<entry key="collectionDataSource" value-ref="collectionDataSource"></entry>
+			</map>
+		</property>
+		<property name="defaultTargetDataSource" ref="defaultDataSource"></property>
+	</bean>
+
+
+	<!-- 定义Hibernate的SessionFactory 扫描Bean文件夹-->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="packagesToScan">
+			<list>
+				<value>cn.broadin.oms.model</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<!-- hibernate参数配置 -->
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.autoReconnect">true</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hbm2ddl.auto">none</prop>
+				<prop key="myeclipse.connection.profile">mysql</prop>
+				<prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- 配置Hibernate的局部事务管理器，使用HibernateTransactionManager类,该类实现了PlatformTransactionManager接口，是针对Hibernate的特定实现 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<!-- 配置HibernateTransactionManager时需要注入SessionFactory的引用 -->
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- 配置事务增强处理Bean，指定事务管理器 -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<!-- 可以指定事物的传播行为/隔离级别/哪些异常不需要回滚/哪些异常需要回滚 -->
+			<tx:method name="get*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="find*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="list*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="select*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+
+	<!-- AOP配置 -->
+	<aop:config>
+		<aop:pointcut id="mpointcut"
+			expression="execution(* cn.broadin.oms.dao.impl.*Impl.*(..))" />
+		<!-- 指定在切入点使用txAdvice事务增强处理 -->
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="mpointcut" />
+		
+	</aop:config>
+	
+	
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean"> 
+		<property name="autoStartup" value="true" />
+		<property name="triggers">
+			<list> 
+			     <!--  <ref bean="aliyunCleanupTrigger" /> -->
+			     <!-- <ref bean="dataStatisticTrigger" /> -->
+			     <ref bean="phoneAddrTrigger" />
+			     <ref bean="cleanFileTrigger"/>
+			</list> 
+		</property>
+	</bean>
+	
+	<!-- webservice 超时设置 -->
+	<http-conf:conduit name="*.http-conduit">
+		<http-conf:client ConnectionTimeout="5000"
+			ReceiveTimeout="10000" />
+	</http-conf:conduit>
+	
+	
+</beans>

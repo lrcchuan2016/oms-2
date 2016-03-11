@@ -1,0 +1,437 @@
+.userIcon{width:42px;height:42px;background:url("../img/user.jpg") 0 0 no-repeat;}
+/* public css */
+*,h1,h2,h3,h4,h5,h6,h7{ font-family:"微软雅黑";}
+body{
+	margin:0px;
+	padding:0px;
+	/*background:url("../../public/img/backgrounds/mesh.png") #333;*/
+}
+
+.form_datetime { width:210px;}
+ul{
+	padding:0px; margin:0px;
+}
+.row{
+	margin:0px;
+	padding:0px;
+}
+table{
+	width:100%;
+	height:auto;
+}
+thead{
+	height: 34px;
+	padding: 0 0 0 10px;
+	
+	color: #555; 
+	font-weight:bold;
+	background-color:#eee;
+	/*background: linear-gradient(to bottom, #fafafa 0%,#bababa 100%);
+	 background-image: url('../img/overlay-pattern.png'); */
+}
+tr,th{
+	text-align:center;
+}
+.table-hover>tbody>tr:hover>td, .table-hover>tbody>tr:hover>th {
+	background-color: #f3f3f3;
+}
+ul{
+	list-style-type:none
+}
+ol >li{
+	padding:2px 10px 2px 5px;
+}
+.page-box{
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-right-color: #DBDBDC;
+	padding: 20px 25px;
+	margin-top: 20px;
+	background:url('../../public/img/backgrounds/bgnoise.png')
+}
+.page-header{
+	display: block;
+	margin: 2px 0;
+	font-size: 30px;
+	font-weight: 30px;
+	line-height: 30px;
+	padding-bottom: 10px;
+	border-bottom: 1px dotted transparent;
+	text-transform: capitalize;
+	text-shadow: 0px 1px 0px white;
+	-webkit-text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.25);
+	-moz-text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.25);
+	text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.25);
+}
+.page-checkbox{
+	display:inline;
+	font-size:14px;
+	line-height: 20px;
+	margin-top:20px;
+	margin-left:20px;
+}
+.page-content{
+	height:920px;
+}
+.divider {
+	height:11px;
+	width:100%;
+	background: url('../../public/img/divider/divider_11x714.png') no-repeat center 0;
+	position:relative;
+	margin:20px 0;
+}
+
+.chartwidget{
+	height:260px;
+	position: relative;
+	margin-top:10px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	border: 1px solid #C2C2C2;
+	padding: 0;
+	box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.5);
+	background: #fff;
+}
+.chartwidget>form{
+	width:100%;
+	display:inline-block;
+	-moz-border-radius: 3px 3px 0px 0px;
+	-khtml-border-radius: 3px 3px 0px 0px;
+	-webkit-border-radius: 3px 3px 0px 0px;
+	border-radius: 3px 3px 0px 0px;
+	color: #778390;
+	border-bottom: 1px solid #C2C2C2;
+	background: linear-gradient(to bottom, #fafafa 0%,#B5BBD3 100%);
+}
+.form-label{
+	margin-top: 6px;
+}
+.top10{
+	color:#fff;
+	background: url('../../public/img/backgrounds/transparant-20.png');
+	box-shadow: 0 1px 1px #606060, 0 1px 1px #2a2a2a inset;
+	-webkit-box-shadow: 0 1px 1px #606060, 0 1px 1px #2a2a2a inset;
+	-moz-box-shadow: 0 1px 1px #606060, 0 1px 1px #2a2a2a inset;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+.top10>header{
+	color: #fff;
+	padding:0 0 0 10px;
+	font-size:14px;
+	line-height:30px;
+	height:30px;
+	border: 1px solid ##34495e;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	background-color: #000;
+    background-image:-moz-linear-gradient(45deg,#fff 25%, transparent 25%, transparent 50%,#fff 50%,#fff 75%, transparent 75%, transparent);
+    background-image:-webkit-gradient(linear,100% 100%,0 0,color-stop(25%,#222),color-stop(25%,transparent),color-stop(50%,transparent),color-stop(50%,#222),color-stop(75%,#222),color-stop(75%,transparent));
+    background-size:10px 10px;
+}
+.top10 table td{
+	font-size:10px;
+	padding:10px 0 10px 0;
+}
+
+/* Channel/channelList.jsp */
+
+.channelChart{
+	height:264px;
+}
+
+/* Channel/channelInfo.jsp */
+
+.behaviorChart{
+	position:relative;
+	height:200px;
+}
+#installChart{
+	width:100%;
+}
+.dataTable{
+	float:left;
+	padding:15px;
+	width:35%;
+	height:200px;
+	background:#fff;
+}
+.dataTable table td{
+	border: 1px solid #C2C2C2;
+}
+
+#convertChart, #increaseChart{
+	float:left;
+	width:65%;
+}
+#coverColumn{
+	background:#fff;
+	margin-top:48px;
+	margin-left:3.5%;
+	width:96%;
+}
+#convertRate, #increaseRate{
+	font-weight:bold;
+	font-size:32px;
+	color:#FF0303;
+}
+
+
+/* User/baseInfo.jsp */
+.albumtable td{
+	width:33.3%;
+	text-align:left;
+	padding:20px 0px 10px 24px;
+}
+
+/* User/useInfo.jsp */
+.useInfoTable td{
+	padding:8px;
+	text-align:left;
+	border:1px solid #C2C2C2;
+}
+
+/* User/userInfo.jsp*/
+.userTable{
+	width:100%;
+	height:220px;
+	background:#fff;
+	margin-left:15px;
+	border-radius:10px;
+}
+.userTable td{
+	text-align:left;
+	padding-left:20px;
+}
+
+.memberFont{
+	color: #fff;
+	font:normal 26px/28px 方正兰亭准黑_GBK,Microsoft YaHei,Tahoma, Geneva, sans-serif;
+}
+.memberFont i {
+  width: 36px;
+  height: 36px;
+  margin-top:-5px;
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  background-image: url(../img/logo2.png);
+}
+
+.userListbox {
+	padding:0px 20px 20px 20px;
+}
+.userListbox .form-group{
+	margin-right:10px;
+}
+
+nav.pages_number > div{
+	margin: 25px 0px 0px 0px;
+}
+
+.table td .btn a{ color:#fff; text-decoration:none; display:block; }
+
+.table td .btn {line-height:14px;}
+
+
+.user-edit-box > form {
+	margin-top:30px;
+}
+
+.user-edit-box > form .table td{
+	border:none;
+}
+
+.user-edit-box .user-info li span{
+	text-align:center;
+}
+.user-edit-box .user-info .t{
+	color:#000; margin-right:10px;
+}
+.user-edit-box .user-info .n{ color:#999;}
+
+.user-edit-box .nav .line{
+	width:0px; border-right:1px solid #ddd;
+	height:20px; margin-top:16px; margin-left:10px; margin-right:10px;
+}
+.user-edit-box .nav li .iconfont{
+	font-size:18px;
+}
+.user-edit-box .navbar{
+	border-bottom-left-radius:0px;
+	border-bottom-right-radius:0px;
+	border-bottom:none;
+	margin-bottom:0px;
+}
+
+.user-edit-box .user-family,
+.user-edit-box .user-content{
+	border-top:none;
+	border:1px solid #ddd;
+	border-bottom-left-radius:5px;
+	border-bottom-right-radius:5px;
+	padding:20px 20px;
+}
+
+.user-edit-box .user-album-list > ul > li{
+	float:left;
+	border:1px solid #eee;
+	width:160px;
+	height:200px;
+	
+	position:relative; margin:5px;
+}
+.user-edit-box .user-album-list > ul > li.active{
+	border:1px solid #F30;
+}
+.user-edit-box .user-album-list > ul > li > a{
+	width:100%;
+	float:left;
+	min-height:160px;
+	position:relative;
+	
+}
+.user-edit-box .user-album-list > ul > li > a img{
+	width:100%;
+}
+.user-edit-box .user-album-list > ul > li > .info{
+	line-height:30px; font-size:14px; width:100%;
+	text-overflow: ellipsis; white-space: nowrap; overflow: hidden;
+}
+
+.user-edit-box .user-album-list > ul > li > .info .glyphicon{
+	font-size:16px; display:block; float:left; margin:8px 6px 
+}
+
+.user-edit-box .user-album-list > ul > li .dropdown{
+	position:absolute; right:5px; top:5px;
+}
+.user-edit-box .user-album-list > ul > li .lockCover{
+	width:100%;
+	height:160px; position:absolute; top:0px; left:0px;
+	background-color:rgba(255,255,255,0.6);
+}
+.user-edit-box .user-album-list > ul > li .lockCover .iconfont{
+	color:#000; font-size:30px; position:absolute; top:50%; left:50%; margin:-15px auto auto -15px; opacity:0.5;
+}
+
+.channel-list .channel_logo { width:120px;}
+.channel-list .table td{ vertical-align:middle;}
+
+
+.channel-add .input-group{ padding-bottom:8px;}
+
+
+.channel-add,.channel-show{ padding:0 20px;}
+
+.channel-show .panel .table tr td{
+	vertical-align:middle;
+	text-align:left;
+}
+.channel-show .panel .table tr td{
+	vertical-align:middle;
+}
+.channel-show .panel .table{margin-bottom:0px;}
+
+.panel-heading { font-weight:bold; font-size:15px; position:relative;}
+.ad-list .panel-heading { cursor:pointer;}
+
+.channel-show .charts-box {
+	min-height:230px; min-width:800px;
+}
+.table_charts_data {margin:0px 10px 0px 35px; padding-bottom:20px;}
+.table_charts_data td{ font-size:8px; text-align:center !important; border:1px #ddd solid; cursor:pointer;}
+.table_charts_data td:hover{
+	background-color:#eee;
+}
+td,th{ vertical-align:middle !important;}
+
+.ad-list .nav-tabs{ margin-bottom:30px; font-weight:bold;}
+
+.ad-list .nav-pills{ margin-bottom:30px; }
+
+.ad-edit-box form { padding:30px;}
+
+.fold_icon { color:#999; position:absolute; right:20px; top:10px;text-align:center; cursor:pointer; border-radius:20px;}
+
+.album-recom-list td img{
+	width:100px;
+}
+.album-recom-list .right-title{
+	font-size:20px; line-height:50px;
+}
+
+.user-edit-box .user-family h4{
+	line-height:30px; border-bottom:1px dashed #ddd; font-weight:bold;
+}
+.user-edit-box .fam-list > li{
+	width:120px;
+	text-align:center;
+	padding:6px; border-radius:6px; margin-bottom:6px; float:left; margin-right:10px;
+	border:1px solid #ddd;
+	position:relative;
+}
+.user-edit-box .fam-list > li:hover{
+	background-color:#eee;
+}
+.user-edit-box .fam-list > li > a{
+	display:block;
+}
+.user-edit-box .fam-list img{ width:60px;}
+
+.user-edit-box .fam-list > li .btn-group{
+	position:absolute; top:5px; right:5px; display:none;
+}
+.user-edit-box .fam-list > li:hover .btn-group{
+	display:block;
+} 
+
+
+#family-info .member-list li{
+	width:120px;
+	text-align:center;
+	float:left;
+	padding:5px;
+	margin:3px;
+}
+#family-info .member-list li:hover{
+	background-color:#eee;
+}
+#family-info .member-list li img{
+	width:40px; border-radius:60px;
+}
+
+#family-info .member-list li > span{
+	display:block;
+}
+#family-info .member-list li > span.name{
+	font-weight:bold; line-height:24px;
+}
+#family-info .member-list li > span.account{
+	font-size:10px; color:#999;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

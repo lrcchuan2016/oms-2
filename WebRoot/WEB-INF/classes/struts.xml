@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC 
+"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" 
+"http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+
+	<!-- 开发配置 -->
+	<constant name="struts.devMode" value="false" />
+	<constant name="struts.serve.static.browserCache" value="false" />
+	<constant name="struts.configuration.xml.reload" value="true"/>
+	<!-- 常规配置 -->
+	<constant name="struts.multipart.maxSize" value="1009715200"></constant>
+	<!-- 基于文件域的防注入实现 -->
+	<bean name="jakartaExt"
+		type="org.apache.struts2.dispatcher.multipart.MultiPartRequest" class="cn.broadin.oms.security.struts.JakartaMultiPartRequestExt"
+		scope="default" />
+	<constant name="struts.multipart.handler" value="jakartaExt" />
+
+	<package name="oms" extends="json-default" abstract="true">
+		<interceptors>
+			<!-- 定义权限检测拦截器 -->
+			<interceptor name="authority"
+				class="cn.broadin.oms.interceptor.AuthorityInterceptor" />
+			<interceptor name="tokenInterceptor" 
+				class="cn.broadin.oms.interceptor.TokenInterceptor"/>
+			<interceptor name="htmlUnescape" 
+				class="cn.broadin.oms.interceptor.HtmlUnescapeInterceptor"/>
+			<interceptor-stack name="globalStack">
+				<interceptor-ref name="authority" />
+				<interceptor-ref name="htmlUnescape"/>
+				<interceptor-ref name="defaultStack">
+					<!-- 自定义表单验证错误后的视图 -->
+					<param name="workflow.inputResultName">ve</param>
+				</interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="globalStack" />
+
+		<global-results>
+			<result name="login">/login.jsp</result>
+			<result name="main">/pages/index/main.jsp</result>
+			<result name="ve" type="json">
+				<param name="contentType">text/json</param>
+				<!--是否忽略等级,默认为true,即不包含父类的属性 -->
+				<param name="ignoreHierarchy">false</param>
+				<param name="includeProperties">fieldErrors.*,actionErrors.*</param>
+			</result>
+		</global-results>
+	</package>
+
+	<!-- 不需要登录权限的请求 -->
+	<package name="login" extends="oms" namespace="/">
+		<default-interceptor-ref name="defaultStack" />
+		<action name="imageAction" class="imageAction">
+			<result type="stream">
+				<param name="contentType">image/png,image/gif,image/jpeg</param>
+				<param name="inputName">imageFile</param>
+				<param name="bufferSize">4096</param>
+			</result>
+		</action>
+		<action name="main" class="managerAction" method="login"></action>
+		<action name="login" class="managerAction" method="logout"></action>
+	</package>
+
+	<!-- 页面跳转请求 -->
+	<package name="action" extends="oms" namespace="/">
+		<global-results>
+			<result name="input">${input}</result>
+			<result name="success">${success}</result>
+		</global-results>
+		
+		<action name="*Action_*" class="{1}Action" method="{2}"></action>
+		<action name="*Pages_*?*">
+			<result>/pages/{1}/{2}.jsp?{3}</result>
+		</action>
+		<action name="*Pages_*">
+			<result>/pages/{1}/{2}.jsp</result>
+		</action>
+	</package>
+
+	<!-- ajax请求 -->
+	<package name="json" extends="oms" namespace="/json">
+		
+		<default-interceptor-ref name="globalStack" />
+		 <!---->
+		<action name="album_*" class="albumAction" method="{1}">
+			<interceptor-ref name="defaultStack"/>
+			<interceptor-ref name="tokenInterceptor">  
+			 	<param name="includeMethods">uploadMedia,saveTemplateMedia,saveDecorateMedia,getDecorateGroup,getDGroupResource,getTemplateInfo,delTemplateMedia,getTemplateMediaList</param>
+			</interceptor-ref>
+			<result type="json">
+				<param name="root">ResultJson</param>
+			</result>
+		</action>
+		
+		
+		<action name="*_*" class="{1}Action" method="{2}">
+			<result type="json">
+				<param name="root">ResultJson</param>
+			</result>
+			<result type="json" name="array">
+				<param name="root">ResultArray</param>
+			</result>
+		</action>
+	</package>
+	
+	<package name="interface" extends="oms" namespace="/interface">
+		
+		<action name="*_*" class="{1}Action" method="{2}">
+			<interceptor-ref name="defaultStack"/>
+			<result type="json">
+				<param name="root">ResultJson</param>
+			</result>
+			<result type="json" name="array">
+				<param name="root">ResultArray</param>
+			</result>
+		</action>
+	</package>
+</struts>    

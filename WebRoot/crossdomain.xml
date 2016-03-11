@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cross-domain-policy>
+   <allow-access-from domain="*.meijx.cn" secure="false"/>
+   <allow-access-from domain="cdn.meijx.cn" secure="false"/>
+   <allow-access-from domain="res.meijx.cn" secure="false" />
+   <allow-access-from domain="*service.meijx.cn" secure="false"/>
+</cross-domain-policy>

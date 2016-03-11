@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<!-- 当前spring配置文件用来配置定时任务 -->
+	<!-- 定期扫描阿里云存储,清除不需要的媒资垃圾 -->
+	<bean id="aliyunCleanupJob"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="aliyunCleanupTask" />
+		</property>
+		<property name="targetMethod">
+			<value>execute</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="aliyunCleanupTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="aliyunCleanupJob" />
+		</property>
+		<property name="cronExpression">
+			<value>59 50 23 * * ?</value>
+		</property>
+	</bean>
+	 <!-- 数据统计 -->
+	<bean id="dataStatisticJob"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="dataStatisticsTask" />
+		</property>
+		<property name="targetMethod">
+			<value>execute</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="dataStatisticTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="dataStatisticJob" />
+		</property>
+		<property name="cronExpression">
+			<value>00 01 00 1 * ?</value>   <!-- 每个月1号零晨开始统计 -->
+			<!--<value>00 15 14 * * ? 2015</value> -->
+		</property>
+	</bean>
+	<!-- 手机号码所属地区统计 -->
+	<bean id="phoneAddrJob"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="phoneAddrTask"/>
+		</property>
+		<property name="targetMethod">
+			<value>execute</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="phoneAddrTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="phoneAddrJob" />
+		</property>
+		<property name="cronExpression">
+			<!--<value>00 23 18 * * ?</value> -->  
+			<value>0 00 00 ? * MON</value>  <!--每周一凌晨0点开始 -->
+		</property>
+	</bean>
+	
+	<!-- 定时清除FileResource文件夹下的文件 -->
+	<bean id="cleanFileJob"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="cleanFileTask"/>
+		</property>
+		<property name="targetMethod">
+			<value>execute</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="cleanFileTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="cleanFileJob" />
+		</property>
+		<property name="cronExpression">
+			<!--<value>00 01 00 1 * ?</value> -->  
+			<value>0 00 03 * * ?</value> <!-- 每天凌晨3点清除文件夹垃圾 -->
+		</property>
+	</bean>
+</beans>

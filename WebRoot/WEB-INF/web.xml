@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <display-name>OMS1.0</display-name>
+    <welcome-file-list>
+		<welcome-file>login.jsp</welcome-file>
+	</welcome-file-list>	
+    <context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:config/applicationContext*.xml</param-value>
+	</context-param>
+	
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<filter>
+		<description>字符编码</description>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>utf-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<filter>
+		<description>防止利用struts的安全漏洞进行攻击</description>
+		<filter-name>strutsLeakFilter</filter-name>
+		<filter-class>cn.broadin.oms.security.struts.StrutsLeakFilter</filter-class>
+		<init-param>
+			<description>可能会造成攻击的关键字</description>
+			<param-name>keywords</param-name>
+			<param-value>redirect:,redirectAction:,action:,java.</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>strutsLeakFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<filter>
+		<filter-name>httpMethodFilter</filter-name>
+		<filter-class>cn.broadin.oms.security.global.HttpMethodFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>httpMethodFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<filter>
+		<description>特殊字符转义filter，防止xss、sql注入等攻击</description>
+		<filter-name>xssFilter</filter-name>
+		<filter-class>cn.broadin.oms.security.global.XssFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>xssFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+	</filter-mapping>
+	<filter>
+		<filter-name>openSessionInView</filter-name>
+		<filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>openSessionInView</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter>
+		<filter-name>struts2</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter>
+		<filter-name>requestContextFilter</filter-name>
+		<filter-class>org.springframework.web.filter.RequestContextFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>requestContextFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter>
+		<filter-name>LoginFilter</filter-name>
+		<filter-class>cn.broadin.oms.filter.checkLoginFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>LoginFilter</filter-name>
+		<url-pattern>/pages/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- session会话失效时间 -->
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+	 <!--错误页面
+	<error-page>
+		<error-code>500,404</error-code>
+		<location>/error.jsp</location>
+	</error-page>
+	  -->
+	  
+</web-app>

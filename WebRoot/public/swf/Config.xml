@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Root>
+   <!-- 上传媒资路径 -->
+   <UploadMediaUrl>http://oms.meijx.cn/json/album_uploadMedia</UploadMediaUrl>
+    <!-- 保存媒资路径 -->
+   <SaveMediaUrl>http://oms.meijx.cn/json/album_saveTemplateMedia</SaveMediaUrl>
+    <!-- 获取媒资路径 -->
+   <GetMediaUrl>http://oms.meijx.cn/json/album_getTemplateMediaList</GetMediaUrl>
+    <!-- 保存装饰路径 -->
+   <SaveDecorateUrl>http://oms.meijx.cn/json/album_saveDecorateMedia</SaveDecorateUrl>
+    <!-- 获取装饰类型路径 -->
+   <GetDecorateTypeUrl>http://oms.meijx.cn/json/album_getDecorateGroup</GetDecorateTypeUrl>
+   <!-- 获取装饰类型资源路径 -->
+   <GetDecorateUrl>http://oms.meijx.cn/json/album_getDGroupResource</GetDecorateUrl>
+   <!-- 删除图片路径 -->
+   <DeleteImageUrl>http://oms.meijx.cn/json/album_delTemplateMedia</DeleteImageUrl>
+   <!-- 获取模板信息路径 -->
+   <GetTemplateUrl>http://oms.meijx.cn/json/album_getTemplateInfo</GetTemplateUrl>
+   <!-- 保存模板信息路径 -->
+   <SaveTemplateUrl>http://oms.meijx.cn/json/album_saveTemplateInfo</SaveTemplateUrl>
+   <!-- 完成跳转模板列表 -->
+   <FinishUrl>http://oms.meijx.cn/main?page=templateList</FinishUrl>   			  
+</Root>
+

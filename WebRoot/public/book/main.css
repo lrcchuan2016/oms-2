@@ -1,0 +1,47 @@
+/* CSS Document */
+.pic_area,
+.pic_area1,.bg {
+	position:absolute; top:0px; left:0px; width:800px; height:450px;
+}
+.bg {}
+.bgon1, .pic_area1{
+	left:-400px; 
+}
+.double,.page { overflow:hidden;}
+
+.first_page, .end_page {width:800px; height:450px; position:absolute; overflow:hidden;}
+.pic_area { overflow:hidden;}
+.pic_area .area { position:absolute; overflow:hidden;}
+.pic_area .pic{ position:absolute;}
+.end_page { display:none;}
+
+.flipbook-viewport .container{
+	left:41px; top:26px;
+}
+
+.flipbook-viewport {
+	width:auto;
+	height:auto;
+}
+.flipbook-viewport .bookLoading {
+	z-index:1;
+	position:absolute;
+	left:452px; 
+	top:252px; 
+}
+.flipbook-viewport .bookBg {
+	position:absolute;
+	left:30px;
+	-webkit-transition: -webkit-box-shadow 0.5s;
+	-moz-transition: -moz-box-shadow 0.5s;
+	-o-transition: -webkit-box-shadow 0.5s;
+	-ms-transition: -ms-box-shadow 0.5s;
+
+	-webkit-box-shadow:0 0 20px rgba(0,0,0,0.5);
+	-moz-box-shadow:0 0 20px rgba(0,0,0,0.5);
+	-o-box-shadow:0 0 20px rgba(0,0,0,0.5);
+	-ms-box-shadow:0 0 20px rgba(0,0,0,0.5);
+	box-shadow:0 0 20px rgba(0,0,0,0.5);
+}
+
+.decorate { position:absolute;}

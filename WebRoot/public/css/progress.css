@@ -1,0 +1,106 @@
+.progress {
+	height: 13px !important;
+	padding: 1px !important;
+	width:100%;
+	filter:none !important;
+	position: relative;
+	overflow: hidden;
+	background-color:transparent;
+	margin-bottom:0px;
+	box-shadow: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	border:1px solid #555555;
+}
+
+aside .progress {
+	position: relative;
+	overflow: hidden;
+	height: 22px;
+	background: url('../img/transparant-20.png');
+	box-shadow: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	border: 1px solid #3D3D3D;
+}
+
+.progress .bar {
+	filter:none !important;
+	position: absolute;
+	overflow: hidden;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	font-size: 11px;
+	font-weight: bold;
+	line-height: 13px;
+	padding: 5px 0 4px 0;
+}
+
+.progress.right .bar {
+	right: 0;
+}
+
+.progress .bar {
+	height: 7px;
+	max-width: 98%;
+}
+.progress-danger .bar, .progress .bar-danger, .label-important.special, .badge-important.special, .important-slider > div.ui-slider-range {
+	background: url(../img/csshack/red-gradient.png) repeat-x #d42622;
+	-webkit-background-size: 100% 100%;
+	-moz-background-size: 100% 100%;
+	-o-background-size: 100% 100%;
+	background-size: 100% 100%;
+	background: url('../img/overlay-pattern.png'), -moz-linear-gradient(top, #fd8383, #c30909 50%, #a70606 50%, #d42622);
+	background: url('../img/overlay-pattern.png'), -webkit-linear-gradient(top, #fd8383, #c30909 50%, #a70606 50%, #d42622);
+	background: url('../img/overlay-pattern.png'), -webkit-gradient(linear, left top, left bottom, from(#fd8383), to(#d42622), color-stop(0.5, #c30909), color-stop(0.5, #a70606));
+	background: url('../img/overlay-pattern.png'), -ms-linear-gradient(top, #fd8383, #c30909 50%, #a70606 50%, #d42622);
+	background: url('../img/overlay-pattern.png'), -o-linear-gradient(top, #fd8383, #c30909 50%, #a70606 50%, #d42622);
+	background: url('../img/overlay-pattern.png'), linear-gradient(top, #fd8383, #c30909 50%, #a70606 50%, #d42622);
+
+}
+.progress-success .bar, .progress .bar-success, .label-success.special, .badge-success.special, .success-slider > div.ui-slider-range {
+	background: url(../img/csshack/green-gradient.png) repeat-x #5eb80a;
+	-webkit-background-size: 100% 100%;
+	-moz-background-size: 100% 100%;
+	-o-background-size: 100% 100%;
+	background-size: 100% 100%;
+	background: url('../img/overlay-pattern.png'), -moz-linear-gradient(top, #b1dc64, #58b104 50%, #499400 50%, #5eb80a);
+	background: url('../img/overlay-pattern.png'), -webkit-linear-gradient(top, #b1dc64, #58b104 50%, #499400 50%, #5eb80a);
+	background: url('../img/overlay-pattern.png'), -webkit-gradient(linear, left top, left bottom, from(#b1dc64), to(#5eb80a), color-stop(0.5, #58b104), color-stop(0.5, #499400));
+	background: url('../img/overlay-pattern.png'), -ms-linear-gradient(top, #b1dc64, #58b104 50%, #499400 50%, #5eb80a);
+	background: url('../img/overlay-pattern.png'), -o-linear-gradient(top, #b1dc64, #58b104 50%, #499400 50%, #5eb80a);
+	background: url('../img/overlay-pattern.png'), linear-gradient(top, #b1dc64, #58b104 50%, #499400 50%, #5eb80a);
+}
+.progress-info .bar, .progress .bar-info, .label-info.special, .badge-info.special, .info-slider > div.ui-slider-range {
+	background: url(../img/csshack/blue-gradient.png) repeat-x #0a5db8;
+	-webkit-background-size: 100% 100%;
+	-moz-background-size: 100% 100%;
+	-o-background-size: 100% 100%;
+	background-size: 100% 100%;
+	background: url('../img/overlay-pattern.png'), -moz-linear-gradient(top, #65b2dd, #045ab2 50%, #004995 50%, #0a5db8);
+	background: url('../img/overlay-pattern.png'), -webkit-linear-gradient(top, #65b2dd, #045ab2 50%, #004995 50%, #0a5db8);
+	background: url('../img/overlay-pattern.png'), -webkit-gradient(linear, left top, left bottom, from(#65b2dd), to(#0a5db8), color-stop(0.5, #045ab2), color-stop(0.5, #004995));
+	background: url('../img/overlay-pattern.png'), -ms-linear-gradient(top, #65b2dd, #045ab2 50%, #004995 50%, #0a5db8);
+	background: url('../img/overlay-pattern.png'), -o-linear-gradient(top, #65b2dd, #045ab2 50%, #004995 50%, #0a5db8);
+	background: url('../img/overlay-pattern.png'), linear-gradient(top, #65b2dd, #045ab2 50%, #004995 50%, #0a5db8);
+}
+.progress-warning .bar, .progress .bar-warning, .label-warning.special, .badge-warning.special, .warning-slider > div.ui-slider-range {
+	background: url(../img/csshack/orange-gradient.png) repeat-x #0a5db8;
+	-webkit-background-size: 100% 100%;
+	-moz-background-size: 100% 100%;
+	-o-background-size: 100% 100%;
+	background-size: 100% 100%;
+	background: url('../img/overlay-pattern.png'), -moz-linear-gradient(top, #ffd844, #ff9f01 50%, #da8d00 50%, #e59400 80%, #d38800);
+	background: url('../img/overlay-pattern.png'), -webkit-linear-gradient(top, #ffd844, #ff9f01 50%, #da8d00 50%, #e59400 80%, #d38800);
+	background: url('../img/overlay-pattern.png'), -webkit-gradient(linear, left top, left bottom, from(#ffd844), to(#d38800), color-stop(0.5, #ff9f01), color-stop(0.5, #da8d00), color-stop(0.8, #e59400));
+	background: url('../img/overlay-pattern.png'), -ms-linear-gradient(top, #ffd844, #ff9f01 50%, #da8d00 50%, #e59400 80%, #d38800);
+	background: url('../img/overlay-pattern.png'), -o-linear-gradient(top, #ffd844, #ff9f01 50%, #da8d00 50%, #e59400 80%, #d38800);
+	background: url('../img/overlay-pattern.png'), linear-gradient(top, #ffd844, #ff9f01 50%, #da8d00 50%, #e59400 80%, #d38800);
+}
